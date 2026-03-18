@@ -1,9 +1,9 @@
 package bg.tu_varna.sit.f24621743;
 
-import bg.tu_varna.sit.f24621743.commandHandling.CLICommand;
+import bg.tu_varna.sit.f24621743.commitHandling.CommitBuffer;
 import bg.tu_varna.sit.f24621743.commandHandling.CommandHandler;
-import bg.tu_varna.sit.f24621743.commandHandling.commands.FileCloser;
-import bg.tu_varna.sit.f24621743.commandHandling.commands.FileOpener;
+import bg.tu_varna.sit.f24621743.commandHandling.CommandParsingException;
+import bg.tu_varna.sit.f24621743.commandHandling.commands.CommandMap;
 import bg.tu_varna.sit.f24621743.userInputHandling.ReadInputException;
 import bg.tu_varna.sit.f24621743.userInputHandling.UserInput;
 
@@ -14,38 +14,27 @@ public class Application {
     static void main(String[] args) {
 
         boolean isRunning = true;
-        UserInput sr = new UserInput();
-        CommandHandler cmd = new CommandHandler();
+        UserInput ui = new UserInput();
+        CommandHandler cmd = new CommandHandler(new CommandMap());
 
-        CLICommand open = new FileOpener();
-        CLICommand close = new FileCloser();
 
         do{
             try{
-                sr.readInput();
+                ui.readInput();
+                isRunning = cmd.executeCommand(ui.getCommand(), ui.getParameters());
             }
-            catch(ReadInputException e){
+            catch(ReadInputException | CommandParsingException e){
                 System.out.println(e.getMessage());
                 continue;
             }
 
-            System.out.println("Command: " + sr.getCommand());
-            System.out.println("Parameters: " + Arrays.toString(sr.getParameters()));
+            System.out.println("Command: " + ui.getCommand());
+            System.out.println("Parameters: " + Arrays.toString(ui.getParameters()));
 
-            switch(sr.getCommand()){
-                case "open":
-                    cmd.setParameters(sr.getParameters());
-                    cmd.doCommand(open);
-                    break;
-                case "close":
-                    cmd.setParameters(sr.getParameters());
-                    cmd.doCommand(close);
-                    break;
-                case "exit":
-                    isRunning = false;
-                    break;
-            }
+
         }while(isRunning);
-        sr.closeScanner();
+        ui.closeScanner();
+        System.out.println("=-(");
     }
+
 }

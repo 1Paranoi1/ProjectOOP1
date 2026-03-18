@@ -3,16 +3,16 @@ package bg.tu_varna.sit.f24621743.commandHandling.commands;
 import bg.tu_varna.sit.f24621743.commitHandling.CommitBuffer;
 import bg.tu_varna.sit.f24621743.commandHandling.CLICommand;
 
-public class FileCloser implements CLICommand {
+
+public class FileSaver extends FileSaving implements CLICommand {
     @Override
     public boolean action(String[] parameters) {
-        CommitBuffer.getInstance().getBuffer().setLength(0);
-        CommitBuffer.getInstance().setFilePath("");
-        return true;
+        String fileLocation = CommitBuffer.getInstance().getFilePath();
+        return action(fileLocation);
     }
 
     @Override
     public String toString() {
-        return ">close - closes currently opened file";
+        return ">save - saves all the changes into currently opened file";
     }
 }
