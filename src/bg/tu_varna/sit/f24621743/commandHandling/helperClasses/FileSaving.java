@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.f24621743.commandHandling.helperClasses;
 
+import bg.tu_varna.sit.f24621743.commandHandling.FileNotOpenException;
 import bg.tu_varna.sit.f24621743.commitHandling.CommitBuffer;
 
 import java.io.File;
@@ -11,7 +12,11 @@ import java.io.PrintWriter;
 
 public class FileSaving {
 
-    public boolean save(File file){
+    public void save(File file) throws FileNotOpenException {
+
+        if (CommitBuffer.getInstance().getFile() == null) {
+            throw new FileNotOpenException ("File is not open");
+        }
 
         try(PrintWriter pw = new PrintWriter(new FileWriter(file))) {
 
@@ -21,12 +26,9 @@ public class FileSaving {
         }
         catch (IOException e){
             System.out.println("Error: No file to save to.");
-            return true;
         }
         catch (NullPointerException e){
             System.out.println("Error: File location is null.");
-            return true;
         }
-        return true;
     }
 }

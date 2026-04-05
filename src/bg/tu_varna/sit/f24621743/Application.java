@@ -16,12 +16,10 @@ public class Application {
         boolean isRunning = true;
         UserInput ui = new UserInput();
         CommandHandler cmd = new CommandHandler(new CommandMap());
-
-
         do{
             try{
                 ui.readInput();
-                isRunning = cmd.executeCommand(ui.getCommand(), ui.getParameters());
+                cmd.executeCommand(ui.getCommand(), ui.getParameters());
             }
             catch(ReadInputException | CommandParsingException e){
                 System.out.println(e.getMessage());
@@ -34,7 +32,6 @@ public class Application {
 
         }while(isRunning);
         ui.closeScanner();
-        System.out.println("=-(");
     }
 
 }

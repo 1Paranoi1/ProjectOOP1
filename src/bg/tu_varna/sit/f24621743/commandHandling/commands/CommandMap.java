@@ -32,4 +32,7 @@ public class CommandMap {
         return commandmap.get(commandName);
     }
 
+    public Map<String, CLICommand> getCommandmap() {
+        return new HashMap<>(commandmap);
+    }
 }

@@ -7,15 +7,18 @@ import bg.tu_varna.sit.f24621743.commitHandling.CommitBuffer;
 public class Booker implements CLICommand {
 
     @Override
-    public boolean action(String[] parameters) {
+    public void action(String[] parameters) {
         if(CommitBuffer.getInstance().getFile() == null) {
             System.out.println("File not found");
-            return true;
         }
         else{
             Event event = new Event(parameters[0], parameters[1], parameters[2], parameters[3], parameters[4]);
             CommitBuffer.getInstance().appendBuffer(event.toString());
-            return true;
         }
+    }
+
+    @Override
+    public String toString() {
+        return ">book <date> <startTime> <endTime> <name> <description> - books an event in the calendar";
     }
 }

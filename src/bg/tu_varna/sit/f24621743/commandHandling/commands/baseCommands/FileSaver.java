@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.f24621743.commandHandling.commands.baseCommands;
 
+import bg.tu_varna.sit.f24621743.commandHandling.FileNotOpenException;
 import bg.tu_varna.sit.f24621743.commandHandling.helperClasses.FileSaving;
 import bg.tu_varna.sit.f24621743.commitHandling.CommitBuffer;
 import bg.tu_varna.sit.f24621743.commandHandling.CLICommand;
@@ -9,9 +10,14 @@ import java.io.File;
 
 public class FileSaver extends FileSaving implements CLICommand {
     @Override
-    public boolean action(String[] parameters) {
-        File file = CommitBuffer.getInstance().getFile();
-        return save(file);
+    public void action(String[] parameters) {
+
+        try{
+            File file = CommitBuffer.getInstance().getFile();
+            save(file);
+        }catch(FileNotOpenException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

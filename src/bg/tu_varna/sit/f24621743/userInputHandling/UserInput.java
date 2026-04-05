@@ -1,8 +1,9 @@
 package bg.tu_varna.sit.f24621743.userInputHandling;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class UserInput implements StringReader {
+public class UserInput {
     private String[] command;
     private final Scanner scanner;
 
@@ -10,8 +11,7 @@ public class UserInput implements StringReader {
         scanner = new Scanner(System.in);
     }
 
-    @Override
-    public String readInput() throws ReadInputException{
+    public void readInput() throws ReadInputException{
         String prompt = scanner.nextLine();
 
         if (prompt.trim().isEmpty()) {
@@ -19,7 +19,6 @@ public class UserInput implements StringReader {
         }
         command = prompt.split(" ");
 
-        return prompt;
     }
 
     public String getCommand() {
@@ -27,10 +26,11 @@ public class UserInput implements StringReader {
     }
 
     public String[] getParameters() {
-        if(command.length > 1){
-            return command[1].split(",");
+        String[] params = new String[command.length - 1];
+        for (int i = 0; i < command.length-1; i++) {
+            params[i] = command[i + 1].trim();
         }
-        return new String[0];
+        return params;
     }
 
     public void closeScanner(){

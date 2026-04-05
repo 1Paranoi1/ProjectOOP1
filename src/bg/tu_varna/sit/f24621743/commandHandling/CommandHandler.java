@@ -9,8 +9,8 @@ public class CommandHandler {
         this.commandMap = commandMap;
     }
 
-    public boolean executeCommand(String commandPrompt, String[] parameters) {
-            return commandMap.getCommand(commandPrompt).action(parameters);
+    public void executeCommand(String commandPrompt, String[] parameters) {
+           commandMap.getCommand(commandPrompt).action(parameters);
     }
 
 }

@@ -15,12 +15,11 @@ public class FileOpener implements CLICommand {
     String fileLocation;
 
     @Override
-    public boolean action(String[] parameters) {
+    public void action(String[] parameters) {
         try{
             fileLocation = parameters[0];
         }catch(ArrayIndexOutOfBoundsException e){
             System.out.println("Error: No file path provided");
-            return true;
         }
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -36,17 +35,14 @@ public class FileOpener implements CLICommand {
             CommitBuffer.getInstance().setBuffer(stringBuilder);
             stringBuilder.setLength(0);
 
-            System.out.println(CommitBuffer.getInstance().getBuffer().toString());
+            //System.out.println(CommitBuffer.getInstance().getBuffer().toString());
 
             CommitBuffer.getInstance().setFile(file);
             bufferedReader.close();
 
         }catch(IOException | ArrayIndexOutOfBoundsException e){
             System.out.println("Error: Wrong file path");
-            return true;
         }
-
-        return true;
     }
 
     @Override

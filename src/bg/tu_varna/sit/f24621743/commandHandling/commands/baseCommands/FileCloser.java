@@ -5,10 +5,9 @@ import bg.tu_varna.sit.f24621743.commandHandling.CLICommand;
 
 public class FileCloser implements CLICommand {
     @Override
-    public boolean action(String[] parameters) {
+    public void action(String[] parameters) {
         CommitBuffer.getInstance().getBuffer().setLength(0);
         CommitBuffer.getInstance().setFile(null);
-        return true;
     }
 
     @Override

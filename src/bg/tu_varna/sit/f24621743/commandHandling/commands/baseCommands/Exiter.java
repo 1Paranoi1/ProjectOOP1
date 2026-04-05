@@ -4,9 +4,8 @@ import bg.tu_varna.sit.f24621743.commandHandling.CLICommand;
 
 public class Exiter implements CLICommand {
     @Override
-    public boolean action(String[] parameters) {
-
-        return false;
+    public void action(String[] parameters) {
+        System.exit(0);
     }
 
     @Override

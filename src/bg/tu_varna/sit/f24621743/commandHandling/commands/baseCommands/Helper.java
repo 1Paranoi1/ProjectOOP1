@@ -1,19 +1,20 @@
 package bg.tu_varna.sit.f24621743.commandHandling.commands.baseCommands;
 
 import bg.tu_varna.sit.f24621743.commandHandling.CLICommand;
+import bg.tu_varna.sit.f24621743.commandHandling.commands.CommandMap;
+
+import java.util.Map;
 
 public class Helper implements CLICommand {
     @Override
-    public boolean action(String[] parameters) {
-        System.out.println("""
-                The following commands are supported: 
-                >open <file> - opens a file at a given file path
-                >close - closes currently opened file
-                >save - saves all the changes into currently opened file
-                >saveAs <file> - saves all the changes into a given file path
-                >help - prints this information
-                >exit - exists the program""");
-        return true;
+    public void action(String[] parameters) {
+
+        CommandMap commandMap = new CommandMap();
+
+        System.out.println("The following commands are supported: ");
+        for (Map.Entry <String, CLICommand> entry : commandMap.getCommandmap().entrySet()) {
+            System.out.println(entry.getValue().toString());
+        }
     }
 
     @Override
