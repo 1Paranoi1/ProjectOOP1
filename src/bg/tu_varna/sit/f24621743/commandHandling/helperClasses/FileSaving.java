@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.f24621743.commandHandling.helperClasses;
 
+import bg.tu_varna.sit.f24621743.calendar.Calendar;
 import bg.tu_varna.sit.f24621743.commandHandling.FileNotOpenException;
 import bg.tu_varna.sit.f24621743.commitHandling.CommitBuffer;
 
@@ -12,7 +13,7 @@ import java.io.PrintWriter;
 
 public class FileSaving {
 
-    public void save(File file) throws FileNotOpenException {
+    public void save(File file){
 
         if (CommitBuffer.getInstance().getFile() == null) {
             throw new FileNotOpenException ("File is not open");
@@ -21,7 +22,7 @@ public class FileSaving {
         try(PrintWriter pw = new PrintWriter(new FileWriter(file))) {
 
             //CommitBuffer.getInstance().appendBuffer("=)");
-
+            Calendar.getInstance().pushCalendar();
             pw.print(CommitBuffer.getInstance().getBuffer());
         }
         catch (IOException e){

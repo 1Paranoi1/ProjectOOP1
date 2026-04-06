@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.f24621743;
 
+import bg.tu_varna.sit.f24621743.commandHandling.FileNotOpenException;
 import bg.tu_varna.sit.f24621743.commitHandling.CommitBuffer;
 import bg.tu_varna.sit.f24621743.commandHandling.CommandHandler;
 import bg.tu_varna.sit.f24621743.commandHandling.CommandParsingException;
@@ -21,7 +22,7 @@ public class Application {
                 ui.readInput();
                 cmd.executeCommand(ui.getCommand(), ui.getParameters());
             }
-            catch(ReadInputException | CommandParsingException e){
+            catch(ReadInputException | CommandParsingException  | FileNotOpenException e){
                 System.out.println(e.getMessage());
                 continue;
             }
