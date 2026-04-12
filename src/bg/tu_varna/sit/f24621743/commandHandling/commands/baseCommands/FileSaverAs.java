@@ -10,8 +10,8 @@ import java.io.File;
 public class FileSaverAs extends FileSaving implements CLICommand {
     @Override
     public void action(String[] parameters) {
-        String fileLocation = parameters[0];
 
+        String fileLocation = parameters[0];
         File file = new File(fileLocation);
 
         try{

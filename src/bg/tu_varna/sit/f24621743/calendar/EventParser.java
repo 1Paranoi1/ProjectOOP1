@@ -1,32 +1,55 @@
 package bg.tu_varna.sit.f24621743.calendar;
 
-import bg.tu_varna.sit.f24621743.commandHandling.helperClasses.formatValidating.DateValidator;
-import bg.tu_varna.sit.f24621743.commandHandling.helperClasses.formatValidating.FormatException;
-import bg.tu_varna.sit.f24621743.commandHandling.helperClasses.formatValidating.TimeValidator;
-import bg.tu_varna.sit.f24621743.commandHandling.helperClasses.formatValidating.Validator;
-import bg.tu_varna.sit.f24621743.commitHandling.CommitBuffer;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class EventParser {
 
-    private Validator dateValidator = new DateValidator();
-    private Validator timeValidator = new TimeValidator();
-
+    // ArrayIndexOutOfBoundsException
     public Event parsEvent(String[] parameters) {
+
         String date = parameters[0];
-        String starTime = parameters[1];
+        String startTime = parameters[1];
         String endTime = parameters[2];
-        String name = parameters[3];
-        String location = parameters[4];
+        boolean holiday = false;
 
+        if(parameters.length == 6) {
+            if(parameters[5].equals("holiday")) {
+                holiday = true;
+            }
+        }
+
+        DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("dd/MM/yy");
+        DateTimeFormatter timePattern = DateTimeFormatter.ofPattern("H:mm");
         try{
-            dateValidator.validate(date);
-            timeValidator.validate(starTime);
-            timeValidator.validate(endTime);
+            LocalTime localStartTime = LocalTime.parse(startTime, timePattern);
+            LocalTime localEndTime = LocalTime.parse(endTime, timePattern);
+            LocalDate localDate = LocalDate.parse(date, datePattern);
 
-            return new Event(date,starTime,endTime,name,location);
-            //CommitBuffer.getInstance().appendBuffer(event.toString());
+            if(parameters.length == 3) {
+                return new Event.EventBuilder(localDate, localStartTime)
+                        .withEndTime(localEndTime)
+                        .build();
+            }
+            else if(parameters.length == 6) {
 
-        }catch(FormatException e){
+                String name = parameters[3];
+                String note = parameters[4];
+
+                return new Event.EventBuilder(localDate, localStartTime )
+                        .withEndTime(localEndTime)
+                        .withName(name)
+                        .withNote(note)
+                        .withHoliday(holiday)
+                        .build();
+            }
+
+
+
+
+        }catch(DateTimeParseException e){
             System.out.println(e.getMessage());
         }
         return null;

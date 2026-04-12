@@ -15,15 +15,15 @@ public class FileSaving {
 
     public void save(File file){
 
-        if (CommitBuffer.getInstance().getFile() == null) {
+        if (Calendar.getInstance().getCommitBuffer().getFile() == null) {
             throw new FileNotOpenException ("File is not open");
         }
 
         try(PrintWriter pw = new PrintWriter(new FileWriter(file))) {
 
-            //CommitBuffer.getInstance().appendBuffer("=)");
-            Calendar.getInstance().pushCalendar();
-            pw.print(CommitBuffer.getInstance().getBuffer());
+            //Calendar.getInstance().pushCalendar();
+            //pw.print(Calendar.getInstance().getCommitBuffer().getFile());
+            pw.print(Calendar.getInstance().toString());
         }
         catch (IOException e){
             System.out.println("Error: No file to save to.");

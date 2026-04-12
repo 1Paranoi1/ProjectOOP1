@@ -3,7 +3,7 @@ package bg.tu_varna.sit.f24621743.commandHandling.commands;
 import bg.tu_varna.sit.f24621743.commandHandling.CLICommand;
 import bg.tu_varna.sit.f24621743.commandHandling.CommandParsingException;
 import bg.tu_varna.sit.f24621743.commandHandling.commands.baseCommands.*;
-import bg.tu_varna.sit.f24621743.commandHandling.commands.calendarCommands.Booker;
+import bg.tu_varna.sit.f24621743.commandHandling.commands.calendarCommands.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +22,11 @@ public class CommandMap {
         commandmap.put("exit", new Exiter());
 
         commandmap.put("book", new Booker());
+        commandmap.put("unbook", new Unbooker());
+        commandmap.put("agenda", new AgendaCommand());
+        commandmap.put("holiday", new HolidayCommand());
+        commandmap.put("find", new FindCommand());
+        commandmap.put("change", new ChangeCommand());
 
     }
 

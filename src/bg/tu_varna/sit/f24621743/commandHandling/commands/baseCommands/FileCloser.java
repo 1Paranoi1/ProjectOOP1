@@ -1,13 +1,15 @@
 package bg.tu_varna.sit.f24621743.commandHandling.commands.baseCommands;
 
+import bg.tu_varna.sit.f24621743.calendar.Calendar;
 import bg.tu_varna.sit.f24621743.commitHandling.CommitBuffer;
 import bg.tu_varna.sit.f24621743.commandHandling.CLICommand;
 
 public class FileCloser implements CLICommand {
     @Override
     public void action(String[] parameters) {
-        CommitBuffer.getInstance().getBuffer().setLength(0);
-        CommitBuffer.getInstance().setFile(null);
+
+        Calendar.getInstance().clearCalendar();
+        Calendar.getInstance().getCommitBuffer().setFile(null);
     }
 
     @Override

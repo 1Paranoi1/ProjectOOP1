@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.f24621743.commandHandling.commands.baseCommands;
 
+import bg.tu_varna.sit.f24621743.calendar.Calendar;
 import bg.tu_varna.sit.f24621743.commandHandling.FileNotOpenException;
 import bg.tu_varna.sit.f24621743.commandHandling.helperClasses.FileSaving;
 import bg.tu_varna.sit.f24621743.commitHandling.CommitBuffer;
@@ -13,7 +14,7 @@ public class FileSaver extends FileSaving implements CLICommand {
     public void action(String[] parameters) {
 
         try{
-            File file = CommitBuffer.getInstance().getFile();
+            File file = Calendar.getInstance().getCommitBuffer().getFile();
             save(file);
         }catch(FileNotOpenException e){
             System.out.println(e.getMessage());

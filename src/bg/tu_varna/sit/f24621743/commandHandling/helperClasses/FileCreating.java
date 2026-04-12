@@ -14,7 +14,10 @@ public class FileCreating {
     public File createFile() {
         try {
             File myFile = new File(fileLocation);
-            myFile.createNewFile();
+
+            if (!myFile.exists()) {
+                myFile.createNewFile();
+            }
             return myFile;
 
         } catch (IOException e) {

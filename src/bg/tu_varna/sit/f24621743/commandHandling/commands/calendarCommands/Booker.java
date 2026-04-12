@@ -17,7 +17,7 @@ public class Booker implements CLICommand {
     @Override
     public void action(String[] parameters) {
 
-        if(CommitBuffer.getInstance().getFile() == null) {
+        if(Calendar.getInstance().getCommitBuffer().getFile() == null){
             throw new FileNotOpenException("Error: File is not open");
         }
         else{
