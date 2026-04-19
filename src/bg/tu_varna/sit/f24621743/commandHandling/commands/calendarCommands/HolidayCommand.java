@@ -9,12 +9,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class HolidayCommand implements CLICommand {
+    private LocalDate date;
+
+    public HolidayCommand(LocalDate date) {
+        this.date = date;
+    }
 
     @Override
-    public void action(String[] parameters) throws FileNotOpenException {
-        DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("dd/MM/yy");
-        LocalDate date = LocalDate.parse(parameters[0], datePattern);
-
+    public void action() throws FileNotOpenException {
 
         for (Event e : Calendar.getInstance().getList()){
             if(e.getDate().equals(date)){

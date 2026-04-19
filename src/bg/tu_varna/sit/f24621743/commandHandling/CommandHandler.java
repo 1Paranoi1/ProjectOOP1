@@ -10,7 +10,8 @@ public class CommandHandler {
     }
 
     public void executeCommand(String commandPrompt, String[] parameters) {
-           commandMap.getCommand(commandPrompt).action(parameters);
+           CLICommand command = commandMap.getCommand(commandPrompt).create(parameters);
+           command.action();
     }
 
 }

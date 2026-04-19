@@ -94,10 +94,13 @@ public class Event{
         return note;
     }
 
+    public boolean isHoliday() {
+        return holiday;
+    }
+
     public void setDate(LocalDate date) {
         this.date = date;
     }
-
     public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }

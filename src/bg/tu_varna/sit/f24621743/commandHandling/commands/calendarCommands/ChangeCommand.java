@@ -2,7 +2,6 @@ package bg.tu_varna.sit.f24621743.commandHandling.commands.calendarCommands;
 
 import bg.tu_varna.sit.f24621743.calendar.Calendar;
 import bg.tu_varna.sit.f24621743.calendar.Event;
-import bg.tu_varna.sit.f24621743.calendar.EventParser;
 import bg.tu_varna.sit.f24621743.commandHandling.CLICommand;
 import bg.tu_varna.sit.f24621743.commandHandling.FileNotOpenException;
 import bg.tu_varna.sit.f24621743.commandHandling.helperClasses.changeStrategy.ChangeEvent;
@@ -13,20 +12,25 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class ChangeCommand implements CLICommand {
-    @Override
-    public void action(String[] parameters) throws FileNotOpenException {
 
-        DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("dd/MM/yy");
-        DateTimeFormatter timePattern = DateTimeFormatter.ofPattern("H:mm");
+    LocalDate date;
+    LocalTime startTime;
+    String option;
+    String newValue;
+
+    public ChangeCommand(LocalDate date, LocalTime startTime, String option, String newValue) {
+        this.date = date;
+        this.startTime = startTime;
+        this.option = option;
+        this.newValue = newValue;
+    }
+
+    @Override
+    public void action() throws FileNotOpenException {
 
         ChangeMap map = new ChangeMap();
 
-        String date = parameters[0];
-        String startTime = parameters[1];
-        String option = parameters[2];
-        String newValue = parameters[3];
-
-        Event event = Calendar.getInstance().findEvent(LocalDate.parse(date, datePattern), LocalTime.parse(startTime, timePattern));
+        Event event = Calendar.getInstance().findEvent(date, startTime);
         ChangeEvent changeEvent = map.get(option);
         changeEvent.apply(event, newValue);
     }

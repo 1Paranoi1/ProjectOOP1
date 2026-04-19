@@ -5,9 +5,7 @@ import bg.tu_varna.sit.f24621743.commitHandling.CommitBuffer;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Calendar {
     private List<Event> events;
@@ -35,9 +33,9 @@ public class Calendar {
         events.add(event);
     }
 
-    public void pushCalendar() {
-        commitBuffer.setBuffer(new StringBuilder(this.toString()));
-        System.out.println(commitBuffer.getBuffer().toString());
+    public void addEvent(LocalDate date, LocalTime startTime, LocalTime endTime, String note, String name) {
+        Event event = eventParser.parsEvent(date , startTime , endTime , note, name);
+        events.add(event);
     }
 
     public List<Event> getList(){

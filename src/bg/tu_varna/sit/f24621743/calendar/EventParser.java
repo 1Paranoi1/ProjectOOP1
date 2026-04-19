@@ -13,30 +13,18 @@ public class EventParser {
         String date = parameters[0];
         String startTime = parameters[1];
         String endTime = parameters[2];
-        boolean holiday = false;
+        String name = parameters[3];
+        String note = parameters[4];
+        boolean holiday = parameters[5].equals("holiday");
 
-        if(parameters.length == 6) {
-            if(parameters[5].equals("holiday")) {
-                holiday = true;
-            }
-        }
 
         DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("dd/MM/yy");
         DateTimeFormatter timePattern = DateTimeFormatter.ofPattern("H:mm");
+
         try{
             LocalTime localStartTime = LocalTime.parse(startTime, timePattern);
             LocalTime localEndTime = LocalTime.parse(endTime, timePattern);
             LocalDate localDate = LocalDate.parse(date, datePattern);
-
-            if(parameters.length == 3) {
-                return new Event.EventBuilder(localDate, localStartTime)
-                        .withEndTime(localEndTime)
-                        .build();
-            }
-            else if(parameters.length == 6) {
-
-                String name = parameters[3];
-                String note = parameters[4];
 
                 return new Event.EventBuilder(localDate, localStartTime )
                         .withEndTime(localEndTime)
@@ -44,14 +32,24 @@ public class EventParser {
                         .withNote(note)
                         .withHoliday(holiday)
                         .build();
-            }
-
-
-
-
         }catch(DateTimeParseException e){
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+
+    public Event parsEvent(LocalDate date, LocalTime startTime, LocalTime endTime, String name, String note) {
+        return new Event.EventBuilder(date, startTime)
+                .withEndTime(endTime)
+                .withName(name)
+                .withNote(note)
+                .build();
+    }
+
+    public Event parsEvent(LocalDate date, LocalTime startTime, LocalTime endTime) {
+        return new Event.EventBuilder(date, startTime)
+                .withEndTime(endTime)
+                .build();
     }
 }

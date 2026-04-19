@@ -5,23 +5,23 @@ import bg.tu_varna.sit.f24621743.calendar.Event;
 import bg.tu_varna.sit.f24621743.commandHandling.CLICommand;
 import bg.tu_varna.sit.f24621743.commandHandling.FileNotOpenException;
 import bg.tu_varna.sit.f24621743.commandHandling.helperClasses.Print;
-import bg.tu_varna.sit.f24621743.commandHandling.helperClasses.formatValidating.DateValidator;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 public class AgendaCommand implements CLICommand {
+    private LocalDate date;
 
-    private List<Event> dateEvents = new ArrayList<Event>();
+    public AgendaCommand(LocalDate date) {
+        this.date = date;
+    }
+
     @Override
-    public void action(String[] parameters) throws FileNotOpenException {
-
-        DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("dd/MM/yy");
-        LocalDate date = LocalDate.parse(parameters[0], datePattern);
+    public void action() throws FileNotOpenException {
+        List<Event> dateEvents = new ArrayList<Event>();
 
         for (Event e : Calendar.getInstance().getList()){
             if(e.getDate().equals(date)){

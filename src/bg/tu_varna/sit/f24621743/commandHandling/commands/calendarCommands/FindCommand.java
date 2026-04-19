@@ -7,13 +7,17 @@ import bg.tu_varna.sit.f24621743.commandHandling.FileNotOpenException;
 import bg.tu_varna.sit.f24621743.commandHandling.helperClasses.Print;
 
 public class FindCommand implements CLICommand {
-    @Override
-    public void action(String[] parameters) throws FileNotOpenException {
+    private String target;
 
-        String target = parameters[0];
+    public FindCommand(String target) {
+        this.target = target;
+    }
+
+    @Override
+    public void action() throws FileNotOpenException {
 
         for (Event e : Calendar.getInstance().getList()){
-            if(e.getName().equals(target) || e.getNote().equals(target)){
+            if(e.getName().contains(target) || e.getNote().contains(target)){
                 Print.printEvent(e);
             }
         }
