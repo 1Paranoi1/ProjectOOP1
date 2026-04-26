@@ -1,5 +1,7 @@
 package bg.tu_varna.sit.f24621743.commandHandling.commandFactories;
 
+import bg.tu_varna.sit.f24621743.calendar.ActiveCalendar;
+import bg.tu_varna.sit.f24621743.calendar.Calendar;
 import bg.tu_varna.sit.f24621743.commandHandling.CLICommand;
 import bg.tu_varna.sit.f24621743.commandHandling.commands.calendarCommands.BookCommand;
 import bg.tu_varna.sit.f24621743.commandHandling.commands.calendarCommands.UnbookCommand;
@@ -17,8 +19,9 @@ public class UnbookFactory implements CommandFactory{
         LocalDate date = LocalDate.parse(parameters[0], datePattern);
         LocalTime startTime = LocalTime.parse(parameters[1], timePattern);
         LocalTime endTime = LocalTime.parse(parameters[2], timePattern);
+        Calendar calendar = ActiveCalendar.getActiveCalendar();
 
-        return new UnbookCommand(date, startTime, endTime);
+        return new UnbookCommand(date, startTime, endTime, calendar);
     }
     @Override
     public String toString() {

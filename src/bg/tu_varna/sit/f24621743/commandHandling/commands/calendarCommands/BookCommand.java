@@ -14,23 +14,25 @@ public class BookCommand implements CLICommand {
     private LocalTime endTime;
     private String note;
     private String name;
+    private Calendar calendar;
 
-    public BookCommand(LocalDate date, LocalTime startTime, LocalTime endTime, String note, String name) {
+    public BookCommand(LocalDate date, LocalTime startTime, LocalTime endTime, String note, String name,  Calendar calendar) {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.note = note;
         this.name = name;
+        this.calendar = calendar;
     }
 
     @Override
     public void action() {
 
-        if(Calendar.getInstance().getCommitBuffer().getFile() == null){
+        if(calendar.getFile() == null){
             throw new FileNotOpenException("Error: File is not open");
         }
         else{
-            Calendar.getInstance().addEvent(date, startTime, endTime, note, name);
+            calendar.addEvent(date, startTime, endTime, note, name);
         }
     }
 

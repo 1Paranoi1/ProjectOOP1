@@ -14,16 +14,18 @@ import java.util.List;
 
 public class AgendaCommand implements CLICommand {
     private LocalDate date;
+    private Calendar calendar;
 
-    public AgendaCommand(LocalDate date) {
+    public AgendaCommand(LocalDate date, Calendar calendar) {
         this.date = date;
+        this.calendar = calendar;
     }
 
     @Override
     public void action() throws FileNotOpenException {
         List<Event> dateEvents = new ArrayList<Event>();
 
-        for (Event e : Calendar.getInstance().getList()){
+        for (Event e : calendar.getList()){
             if(e.getDate().equals(date)){
                dateEvents.add(e);
             }

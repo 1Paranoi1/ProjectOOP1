@@ -1,13 +1,13 @@
 package bg.tu_varna.sit.f24621743;
 
 import bg.tu_varna.sit.f24621743.commandHandling.FileNotOpenException;
-import bg.tu_varna.sit.f24621743.commitHandling.CommitBuffer;
 import bg.tu_varna.sit.f24621743.commandHandling.CommandHandler;
 import bg.tu_varna.sit.f24621743.commandHandling.CommandParsingException;
 import bg.tu_varna.sit.f24621743.commandHandling.commands.CommandMap;
 import bg.tu_varna.sit.f24621743.userInputHandling.ReadInputException;
 import bg.tu_varna.sit.f24621743.userInputHandling.UserInput;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 //open C:\Temp\File.txt
@@ -22,7 +22,7 @@ public class Application {
                 ui.readInput();
                 cmd.executeCommand(ui.getCommand(), ui.getParameters());
             }
-            catch(ReadInputException | CommandParsingException  | FileNotOpenException e){
+            catch(ReadInputException | CommandParsingException | FileNotOpenException e){
                 System.out.println(e.getMessage());
                 continue;
             }

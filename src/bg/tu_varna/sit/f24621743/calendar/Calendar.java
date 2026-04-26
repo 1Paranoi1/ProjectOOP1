@@ -1,7 +1,6 @@
 package bg.tu_varna.sit.f24621743.calendar;
 
-import bg.tu_varna.sit.f24621743.commitHandling.CommitBuffer;
-
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -10,23 +9,17 @@ import java.util.List;
 public class Calendar {
     private List<Event> events;
     private EventParser eventParser;
-    private CommitBuffer commitBuffer;
+    private File file;
 
     private static Calendar instance;
 
-    private Calendar() {
+    protected Calendar(File file) {
         events = new ArrayList<>();
         eventParser = new EventParser();
 
-        commitBuffer = new CommitBuffer();
+        file = file;
     }
 
-    public static Calendar getInstance() {
-        if (instance == null) {
-            instance = new Calendar();
-        }
-        return instance;
-    }
 
     public void addEvent(String[] parameters) {
         Event event = eventParser.parsEvent(parameters);
@@ -46,9 +39,6 @@ public class Calendar {
         events.remove(event);
     }
 
-    public CommitBuffer getCommitBuffer() {
-        return commitBuffer;
-    }
 
     public void clearCalendar() {
         events.clear();
@@ -70,5 +60,9 @@ public class Calendar {
             sb.append(event.toString()).append("\n");
         }
         return sb.toString();
+    }
+
+    public File getFile() {
+        return file;
     }
 }

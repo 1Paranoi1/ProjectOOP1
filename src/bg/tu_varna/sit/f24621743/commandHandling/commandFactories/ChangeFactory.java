@@ -1,5 +1,7 @@
 package bg.tu_varna.sit.f24621743.commandHandling.commandFactories;
 
+import bg.tu_varna.sit.f24621743.calendar.ActiveCalendar;
+import bg.tu_varna.sit.f24621743.calendar.Calendar;
 import bg.tu_varna.sit.f24621743.commandHandling.CLICommand;
 import bg.tu_varna.sit.f24621743.commandHandling.commands.calendarCommands.ChangeCommand;
 
@@ -18,8 +20,9 @@ public class ChangeFactory implements CommandFactory{
         LocalTime startTime = LocalTime.parse(parameters[1], timePattern);
         String option = parameters[2];
         String newValue = parameters[3];
+        Calendar calendar = ActiveCalendar.getActiveCalendar();
 
-        return new ChangeCommand(date, startTime, option, newValue);
+        return new ChangeCommand(date, startTime, option, newValue, calendar);
     }
     @Override
     public String toString() {

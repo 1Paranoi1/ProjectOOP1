@@ -1,5 +1,7 @@
 package bg.tu_varna.sit.f24621743.commandHandling.commandFactories;
 
+import bg.tu_varna.sit.f24621743.calendar.ActiveCalendar;
+import bg.tu_varna.sit.f24621743.calendar.Calendar;
 import bg.tu_varna.sit.f24621743.commandHandling.CLICommand;
 import bg.tu_varna.sit.f24621743.commandHandling.commands.calendarCommands.HolidayCommand;
 
@@ -12,7 +14,8 @@ public class HolidayFactory implements CommandFactory{
     @Override
     public CLICommand create(String[] parameters) {
         LocalDate date = LocalDate.parse(parameters[0], datePattern);
-        return new HolidayCommand(date);
+        Calendar calendar = ActiveCalendar.getActiveCalendar();
+        return new HolidayCommand(date, calendar);
     }
     @Override
     public String toString() {

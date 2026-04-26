@@ -2,13 +2,14 @@ package bg.tu_varna.sit.f24621743.commandHandling.commandFactories;
 
 import bg.tu_varna.sit.f24621743.commandHandling.CLICommand;
 import bg.tu_varna.sit.f24621743.commandHandling.commands.baseCommands.OpenCommand;
+import bg.tu_varna.sit.f24621743.commandHandling.commands.baseCommands.SaveAsCommand;
 
 public class SaveAsFactory implements CommandFactory{
 
     @Override
     public CLICommand create(String[] parameters) {
         String filePath = parameters[0];
-        return new OpenCommand(filePath);
+        return new SaveAsCommand(filePath);
     }
     @Override
     public String toString() {

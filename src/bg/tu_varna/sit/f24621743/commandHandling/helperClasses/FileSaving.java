@@ -1,8 +1,6 @@
 package bg.tu_varna.sit.f24621743.commandHandling.helperClasses;
 
-import bg.tu_varna.sit.f24621743.calendar.Calendar;
-import bg.tu_varna.sit.f24621743.commandHandling.FileNotOpenException;
-import bg.tu_varna.sit.f24621743.commitHandling.CommitBuffer;
+import bg.tu_varna.sit.f24621743.calendar.ActiveCalendar;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,15 +13,8 @@ public class FileSaving {
 
     public void save(File file){
 
-        if (Calendar.getInstance().getCommitBuffer().getFile() == null) {
-            throw new FileNotOpenException ("File is not open");
-        }
-
         try(PrintWriter pw = new PrintWriter(new FileWriter(file))) {
-
-            //Calendar.getInstance().pushCalendar();
-            //pw.print(Calendar.getInstance().getCommitBuffer().getFile());
-            pw.print(Calendar.getInstance().toString());
+            pw.print(ActiveCalendar.getActiveCalendar().toString());
         }
         catch (IOException e){
             System.out.println("Error: No file to save to.");

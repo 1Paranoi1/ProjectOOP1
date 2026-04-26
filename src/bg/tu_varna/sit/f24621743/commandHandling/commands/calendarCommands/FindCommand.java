@@ -8,15 +8,17 @@ import bg.tu_varna.sit.f24621743.commandHandling.helperClasses.Print;
 
 public class FindCommand implements CLICommand {
     private String target;
+    private Calendar calendar;
 
-    public FindCommand(String target) {
+    public FindCommand(String target, Calendar calendar) {
         this.target = target;
+        this.calendar = calendar;
     }
 
     @Override
     public void action() throws FileNotOpenException {
 
-        for (Event e : Calendar.getInstance().getList()){
+        for (Event e : calendar.getList()){
             if(e.getName().contains(target) || e.getNote().contains(target)){
                 Print.printEvent(e);
             }

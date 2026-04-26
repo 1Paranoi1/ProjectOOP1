@@ -9,20 +9,21 @@ import bg.tu_varna.sit.f24621743.commandHandling.helperClasses.changeStrategy.Ch
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class ChangeCommand implements CLICommand {
 
-    LocalDate date;
-    LocalTime startTime;
-    String option;
-    String newValue;
+    private LocalDate date;
+    private LocalTime startTime;
+    private String option;
+    private String newValue;
+    private Calendar calendar;
 
-    public ChangeCommand(LocalDate date, LocalTime startTime, String option, String newValue) {
+    public ChangeCommand(LocalDate date, LocalTime startTime, String option, String newValue, Calendar calendar) {
         this.date = date;
         this.startTime = startTime;
         this.option = option;
         this.newValue = newValue;
+        this.calendar = calendar;
     }
 
     @Override
@@ -30,7 +31,7 @@ public class ChangeCommand implements CLICommand {
 
         ChangeMap map = new ChangeMap();
 
-        Event event = Calendar.getInstance().findEvent(date, startTime);
+        Event event = calendar.findEvent(date, startTime);
         ChangeEvent changeEvent = map.get(option);
         changeEvent.apply(event, newValue);
     }

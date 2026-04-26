@@ -1,6 +1,8 @@
 package bg.tu_varna.sit.f24621743.commandHandling.commands.baseCommands;
 
+import bg.tu_varna.sit.f24621743.calendar.ActiveCalendar;
 import bg.tu_varna.sit.f24621743.calendar.Calendar;
+import bg.tu_varna.sit.f24621743.calendar.CalendarManager;
 import bg.tu_varna.sit.f24621743.commandHandling.helperClasses.FileCreating;
 import bg.tu_varna.sit.f24621743.commandHandling.helperClasses.Print;
 
@@ -19,20 +21,21 @@ public class OpenCommand implements CLICommand {
     @Override
     public void action() {
 
-        StringBuilder stringBuilder = new StringBuilder();
         FileCreating fc = new FileCreating(fileLocation);
         File file = fc.createFile();
 
         try(FileReader fileReader = new FileReader(file)){
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
+            Calendar calendar = CalendarManager.getCalendar(file);
+            ActiveCalendar.setActiveCalendar(calendar);
+
             String line;
             while((line = bufferedReader.readLine()) != null) {
-                Calendar.getInstance().addEvent(line.split(" "));
+                calendar.addEvent(line.split(" "));
             }
 
-            Calendar.getInstance().getCommitBuffer().setFile(file);
-            Print.printEvents(Calendar.getInstance().getList());
+            Print.printEvents(calendar.getList());
             bufferedReader.close();
 
         }catch(IOException | ArrayIndexOutOfBoundsException e){

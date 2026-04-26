@@ -1,5 +1,7 @@
 package bg.tu_varna.sit.f24621743.commandHandling.commandFactories;
 
+import bg.tu_varna.sit.f24621743.calendar.ActiveCalendar;
+import bg.tu_varna.sit.f24621743.calendar.Calendar;
 import bg.tu_varna.sit.f24621743.commandHandling.CLICommand;
 import bg.tu_varna.sit.f24621743.commandHandling.commands.calendarCommands.BookCommand;
 
@@ -18,7 +20,8 @@ public class BookFactory implements CommandFactory{
         LocalTime endTime = LocalTime.parse(parameters[2], timePattern);
         String note = parameters[3];
         String name = parameters[3];
-        return new BookCommand(date, startTime, endTime, note, name);
+        Calendar calendar = ActiveCalendar.getActiveCalendar();
+        return new BookCommand(date, startTime, endTime, note, name, calendar);
     }
 
     @Override
