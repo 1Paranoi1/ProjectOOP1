@@ -15,7 +15,7 @@ public class UserInput {
         String prompt = scanner.nextLine();
 
         if (prompt.trim().isEmpty()) {
-            throw new ReadInputException("Inappropriate user input");
+            throw new ReadInputException("ERROR| User input is empty");
         }
         command = prompt.split(" ");
 

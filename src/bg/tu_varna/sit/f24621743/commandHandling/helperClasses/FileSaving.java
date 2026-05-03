@@ -17,10 +17,10 @@ public class FileSaving {
             pw.print(ActiveCalendar.getActiveCalendar().toString());
         }
         catch (IOException e){
-            System.out.println("Error: No file to save to.");
+            System.out.println("ERROR| No file to save to.");
         }
         catch (NullPointerException e){
-            System.out.println("Error: File location is null.");
+            System.out.println("ERROR| File location is null.");
         }
     }
 }

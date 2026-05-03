@@ -27,14 +27,6 @@ public class BookCommand implements CLICommand {
 
     @Override
     public void action() {
-
-        if(calendar.getFile() == null){
-            throw new FileNotOpenException("Error: File is not open");
-        }
-        else{
-            calendar.addEvent(date, startTime, endTime, note, name);
-        }
+        calendar.addEvent(date, startTime, endTime, note, name);
     }
-
-
 }

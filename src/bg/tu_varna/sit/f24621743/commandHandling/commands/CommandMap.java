@@ -33,7 +33,7 @@ public class CommandMap {
 
     public CommandFactory getCommand(String commandName) throws CommandParsingException {
         if (!commandmap.containsKey(commandName)) {
-            throw new CommandParsingException("Error: No such command");
+            throw new CommandParsingException("ERROR| No such command");
         }
         return commandmap.get(commandName);
     }

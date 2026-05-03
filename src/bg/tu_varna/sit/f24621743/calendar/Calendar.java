@@ -16,8 +16,7 @@ public class Calendar {
     protected Calendar(File file) {
         events = new ArrayList<>();
         eventParser = new EventParser();
-
-        file = file;
+        this.file = file;
     }
 
 

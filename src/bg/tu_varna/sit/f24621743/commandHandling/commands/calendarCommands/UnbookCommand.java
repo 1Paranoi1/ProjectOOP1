@@ -29,8 +29,6 @@ public class UnbookCommand implements CLICommand {
 
     @Override
     public void action() throws FileNotOpenException {
-
-
         EventParser eventParser = new EventParser();
         Event target = eventParser.parsEvent(date, startTime, endTime);
 
